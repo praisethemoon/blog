@@ -2,8 +2,10 @@
 layout: default
 title: Who is praisethemoon?
 ---
+<article class="prose lg:prose-xl">
 
-Data Scientist and Software Engineer. My socials on the footer.
+I am a Data Scientist and Software Engineer. 
+My socials on the footer.
 Areas of interest: 
 
 ```
@@ -15,3 +17,5 @@ Areas of interest:
 ```
 
 Get in touch: `doit@praisethemoon.org`
+
+</article>
