@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Build 11ty Site
       run: |
@@ -18,11 +20,11 @@ jobs:
         npm run build 
         
     - name: Deploy
-      uses: Dylan700/sftp-upload-action@latest
+      uses: milanmk/actions-file-deployer@master
       with:
-        server: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        uploads: |
-          ./ => ./www/
+        remote-protocol: "sftp"
+        remote-host: ${{ secrets.REMOTE_HOST }}
+        remote-user: ${{ secrets.REMOTE_USER }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        remote-path: "www/"
+        local-path: "./_site/"
