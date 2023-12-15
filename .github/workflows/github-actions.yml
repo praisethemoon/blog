@@ -18,12 +18,11 @@ jobs:
         npm run build 
 
     - name: Deploy to Self-Hosted Server via SFTP
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: appleboy/scp-action@master
       with:
-        server: ${{ secrets.REMOTE_HOST }}
+        host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.SSH_PRIVATE_KEY }}  # Using SFTP, your private key or password goes here
-        protocol: sftp
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22  # Default SFTP port; change if your server uses a different port
-        local-dir: _site/
-        server-dir: www/  # Path to the directory on your server where you want to deploy
+        source: "_site/*"
+        target: "www"  # Adjust the target path to the correct directory on your server
