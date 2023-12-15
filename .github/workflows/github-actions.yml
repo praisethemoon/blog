@@ -1,0 +1,29 @@
+name: Deploy 11ty Website via SFTP
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to match your main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build 11ty Site
+      run: |
+        npm install
+        npm run build  # This command should output your site to _site directory
+
+    - name: Deploy to Self-Hosted Server via SFTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.SSH_PRIVATE_KEY }}  # Using SFTP, your private key or password goes here
+        protocol: sftp
+        port: 22  # Default SFTP port; change if your server uses a different port
+        local-dir: _site/
+        server-dir: www/  # Path to the directory on your server where you want to deploy
