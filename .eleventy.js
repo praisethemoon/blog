@@ -40,14 +40,16 @@ module.exports = function(eleventyConfig) {
     return Array.from(tagsSet).sort()
   })
 
-  const md = markdownIt({ html: true, linkify: true })
-  md.use(markdownItAnchor, { 
+  const md = markdownIt({ html: true, linkify: true, typographer: true, breaks: false, quotes: '“”‘’' })
+  /*
+    disabled because comments use page URL to connect with github issues.
+    md.use(markdownItAnchor, { 
     level: [1, 2], 
     permalink: markdownItAnchor.permalink.headerLink({ 
       safariReaderFix: true,
       class: 'header-anchor',
     })
-  })
+  })*/
   eleventyConfig.setLibrary('md', md)
 
   // asset_img shortcode
