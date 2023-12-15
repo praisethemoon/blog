@@ -3,7 +3,7 @@ name: Deploy 11ty Website via SFTP
 on:
   push:
     branches:
-      - main  # Adjust this to match your main branch
+      - master
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,7 @@ jobs:
     - name: Build 11ty Site
       run: |
         npm install
-        npm run build  # This command should output your site to _site directory
+        npm run build 
 
     - name: Deploy to Self-Hosted Server via SFTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
