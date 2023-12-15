@@ -34,7 +34,7 @@ This language is designed with the following goals in mind:
 Now that the goals have been set, let's look at the language itself.
 
 # Type-C
-Type-C is multi-paradgim language. It is a statically typed language with support for both interface oriented and functional programming. It is designed to be an application-level language, similar to python or modern JavaScript.
+`Type-C` is multi-paradgim language. It is a statically typed language with support for both interface oriented and functional programming. It is designed to be an application-level language, similar to python or modern JavaScript.
 
 - Interface oriented programming: extend interface rather than classes.
 - Functional programming: First class functions, closures, variadic types, etc.
@@ -121,6 +121,7 @@ printPoint({10, 10})
 Concurrency is a built-in feature within Type-C, integrated in the form of processes. The model is agent-based, where each process is an agent that can communicate with other agents through messages. Processes are scheduled by the VM, and they are non-blocking. In the following example, type annotations are used for clarity, but they are not required. Type-C type inference can handle process types as well.
 ```rust
 import std.io
+from std.concurrency import Runnable, Promise
 
 type DownloadInput = variant {
     DownloadFile(path: string)
