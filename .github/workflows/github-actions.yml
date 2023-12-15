@@ -26,5 +26,5 @@ jobs:
         remote-host: ${{ secrets.REMOTE_HOST }}
         remote-user: ${{ secrets.REMOTE_USER }}
         remote-password: ${{ secrets.SSH_PRIVATE_KEY }}
-        remote-path: "www/"
+        remote-path: "/www"
         local-path: "./_site/"
