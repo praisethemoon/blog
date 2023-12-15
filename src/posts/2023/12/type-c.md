@@ -7,7 +7,7 @@ tags:
 - type-c
 - programming language
 ---
-
+A sneak-peek into Type-C, a new programming language I am working on.
 <!-- excerpt -->
 {% asset_img "type-c.png" "typec" %}
 
