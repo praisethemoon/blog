@@ -20,7 +20,7 @@ jobs:
         npm run build 
         
     - name: Deploy
-      uses: milanmk/actions-file-deployer@master
+      uses: milanmk/actions-file-deployer@1.13
       with:
         remote-protocol: "sftp"
         remote-host: ${{ secrets.REMOTE_HOST }}
