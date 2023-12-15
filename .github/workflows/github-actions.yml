@@ -22,6 +22,7 @@ jobs:
     - name: Deploy
       uses: milanmk/actions-file-deployer@1.13
       with:
+        sync: "full"
         remote-protocol: "sftp"
         remote-host: ${{ secrets.REMOTE_HOST }}
         remote-user: ${{ secrets.REMOTE_USER }}
