@@ -1,7 +1,7 @@
 ---
 title: "Introducing Type-C"
 date: "2023-12-08"
-published: false
+published: true
 
 tags:
 - type-c
@@ -60,7 +60,7 @@ Here is the tl;dr. Exceptions, as the name suggest, are exceptional cases. But y
 ## Hello Type-C
 
 ### Hello World
-```rs
+```rust
 import std.io 
 fn main(args: string[] ) -> u32 
 { 
@@ -82,7 +82,6 @@ If you have ligatures enabled, then you have to admit the code looks sexy.
 
 ### Data Types
 ```rust
-
 // struct
 type Point = {
     x: u32
@@ -100,6 +99,15 @@ type ServerResponse<T> = variant {
     Ok(data: T),
     Error(code: u32)
 }
+
+let p1: Point = {10, 10} // {x, y}
+let p2: {x: u32} = p1
+
+fn printPoint(p: {x: u32, y: u32}) -> void {
+    print("x: ", p.x, " y: ", p.y)
+}
+
+printPoint({10, 10})
 ```
 
 ### FFI
@@ -131,3 +139,5 @@ size_t typev_ffi_open(TypeV_Core* core){
 ## Cool! What's the state?
 Everything is still under-development. The code generator is still being written. The VM needs major features such as GC, improved memory management, etc.
 So expect any release in mid-2024. I will be posting updates on the language here. So stay tuned.
+
+I will keep posting about both the language and the virtual machine, so stay tuned.
