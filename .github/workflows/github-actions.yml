@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Build 11ty Site
       run: |
         npm install
         npm run build 
-
-    - name: Deploy to Self-Hosted Server via SFTP
-      uses: appleboy/scp-action@master
+        
+    - name: Deploy
+      uses: Dylan700/sftp-upload-action@latest
       with:
-        host: ${{ secrets.REMOTE_HOST }}
+        server: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22  # Default SFTP port; change if your server uses a different port
-        source: "_site/*"
-        target: "www"  # Adjust the target path to the correct directory on your server
+        password: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        uploads: |
+          ./ => ./www/
