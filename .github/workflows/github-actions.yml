@@ -25,6 +25,6 @@ jobs:
         remote-protocol: "sftp"
         remote-host: ${{ secrets.REMOTE_HOST }}
         remote-user: ${{ secrets.REMOTE_USER }}
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        remote-password: ${{ secrets.SSH_PRIVATE_KEY }}
         remote-path: "www/"
         local-path: "./_site/"
