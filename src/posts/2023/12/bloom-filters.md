@@ -111,6 +111,13 @@ hash("what's up") = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1]
 {% asset_img "bloom/query_3.png" "Query 3" %}
 Figure2: Querying for a value, query bits are in red.
 
+
+Let's review what explained earlier now:
+- Probabilistic Model: It looks at the result of all the additions of the hashes in the set, rather than look up each element. It doesn't store history or any of the sort.
+- Can return false positives: because a hash of a non-existing item, can overlap with the sum of hashes of multiple other existing items.
+- Cannot return false negatives: because if an item does exist in the filter, then all the bits in the filter will be set.
+- Space efficient: because it only stores the bits in the filter, rather than the actual items.
+
 ### Why are they even useful?
 First, you must have a problem where false positives are acceptable. Let's take a look an example, fraud detection. When a user pays for something online, the bank can check if the transaction is fraudulent or not. False positive in this scenario are acceptable as long as they are not too frequent. Because fraud detection doesn't actually detect a fraudulent operation, but rather a **potentially** fraudulent transaction. One way the banking platform does this is:
 
