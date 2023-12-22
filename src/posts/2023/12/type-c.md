@@ -33,6 +33,9 @@ This language is designed with the following goals in mind:
 
 Now that the goals have been set, let's look at the language itself.
 
+
+{% asset_img "tc/hello-people.png" "Hello People!" %}
+
 # Type-C
 `Type-C` is multi-paradgim language. It is a statically typed language with support for both interface oriented and functional programming. It is designed to be an application-level language, similar to python or modern JavaScript.
 
