@@ -1,9 +1,8 @@
 ---
 title: "Type-C Dev Post 1"
 date: "2023-12-22"
+published: false
 tags:
-- type-c
-- type-v
 ---
 In a new series of blog post, I highlight the current status of type-c and the type-v VM. Since I am posting on an infrequent basis, expect the order of these posts to be chaotic.
 <!-- excerpt -->
