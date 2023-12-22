@@ -5,20 +5,19 @@ pagination:
   data: collections.posts
   size: 10
   reverse: true
-  alias: posts
+  alias: postssss
 ---
 
+<ol class="relative border-s border-gray-200 dark:border-gray-700">  
 {% for post in pagination.items %}
 {% if post.data.published %}
-<div class="py-4">
-  <p>
-    <span class="text-2xl sm:text-4xl font-bold hover:text-blue-700 leading-tight"><a href="{{ post.url }}">{{ post.data.title }}</a></span>
-    <span class="text-base sm:text-2xl font-normal"> &middot; {{ post.templateContent | readTime }} min read</span>
-  </p>
-  <em>{{ post.date | date: "%Y-%m-%d" }}</em>
-  <p class="mt-4">{{ post.data.post_excerpt }}...</p>
-  
-  <div class="flex justify-between items-center mt-4">
+
+  <li class="mb-10 ms-4"> 
+    <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+    <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ post.date | date: "%B %d, %Y" }}</time>
+    <a href="{{ post.url }}"><h3 class="text-4xl font-semibold text-gray-900 dark:text-white">{{post.data.title}}</h3></a>
+    <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{{post.data.post_excerpt}}</p>
+
     <div class="flex-1 pr-4">
       {% for tag in post.data.tags %}
         {% if tag != "posts" %}
@@ -28,14 +27,11 @@ pagination:
         {% endif %}
       {% endfor %}
     </div>
-
-    <a class="flex-none hover:underline font-semibold text-blue-700" href="{{ post.url }}">Read this post &rarr;</a>
-  </div>
-
-</div>
+  
+  </li>
 
 {% endif %}
 {% endfor %}
-
+</ol>
 
 {% include "paginator.liquid" %}
