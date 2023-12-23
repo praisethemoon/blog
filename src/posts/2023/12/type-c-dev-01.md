@@ -9,8 +9,7 @@ In a new series of blog post, I highlight the current status of type-c and the t
 
 ## Type-C
 Type-C, does not aim to be a toy language. Even though it is the first large-scale language that I develop (scale is relative), I am trying to make it as efficient as possible. 
-On the road of developments, choices have been made. Some of them are good, some of them are hard to deal with, let's talk about the foundations of the language:
-
+On the road of developments, choices have been made. Some of them are good, some of them are hard to deal with, but each had an impact on the final language. Let's talk about the some foundations of the language:
 
 1. Statically typed language:
 
@@ -52,16 +51,10 @@ Well javascript uses hashmap for fields. So order doesn't really matter. Type-C 
 Let's look at the following example:
 
 ```
-strict type S = {x: i32, y: i32, z: {x: i32, y: i32}}
-
 fn f() {
     let alpha: {x: i32, y: i32} = {y: 1, x: 6}
 }
-
 ```
-
-The keyword `strict` indicate that type will be matched using its name, which is `S` in this case. This keyword is used in purposes where you want to be explicit about the type. For instance, when you want to create a function that takes a struct as an argument. This feature doesn't have much impact on type inference, but rather is a syntactic sugar feature. It changes type checking from structural to nominal, but can be easily by passed through regular casting. However, this is just for demonstration purposes, it is not being used in this example.
-
 What is important to notice in this example is how the type of `alpha` is inferred. Even though the type of alpha is not necessarily the value it is being assigned to, it is still compatible with it. This is because the type of `alpha` `{x: i32, y: i32}` is structurally compatible with `{y: i32, x: i32}`. 
 
 The way type-c handles this, is by using two different data structures for structs. First being regular `struct`, second is `shadow struct`. A shadow struct, is merely a different view of the same structure, it is either the full view or a partial view.
@@ -134,7 +127,15 @@ The field index of `s_set_field_i32` is `0`, but if we go through the offset tab
 
 Since the field 0 offset was swapped with the field 1 offset in the original, the actual offset of the field 0 in the shadow is 4, hence both structs are updated correctly.
 
-### Conclusion
+### Consequences of this design choice:
+This design choice has a few consequences:
+- If you specify a datatype, and the inferred type, while compatible has a different order, the compiler will generate a shadow struct. This is not necessarily a bad thing, the compiler can be tweeked to re-arrenge the fields in the struct to match the order of the inferred type. However, this is not a priority at the moment. Hence, the compiler will generate a shadow struct, meaning additional instructions will need to be executed, creating slightly more overhead, which scales with the size of the datatype (numer of fields in our struct example).
+- Garbage collection is a bit more complicated: If a struct `{x: i32, y: i32}` is a shadow of a larger struct `{x: i32, y: i32, z: i32[10000]}`, the larger struct will remain in memory as long as the shadow struct is alive. The implementation of the GC hasn't been decided yet, but this is something to keep in mind as well.
 
-This post will hopefully turn into a series of posts that will highlight the development of type-c. I am not sure how frequent these posts will be, but I will try to keep them as frequent as possible.
-With that being said, have a good one.
+Type-C, like any other language will need to rely on developer's knoweldge of the language to get the most out of it. Blind usage of structures may result in inefficient memory as well as slow code, which could have been easily avoided. 
+
+
+### Conclusion
+This has been one challenged that I have wanted to address for a while. So far I am pleased with the current solution. Once I get the compiler to 100%, I will start profiling and hopefully compare the performance of type-c against other languages.
+
+Until then, see you in the next artcile.
